@@ -1,0 +1,1373 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <AssemblyName>$(ProjectName)</AssemblyName>
+    <RootNamespace>$(ProjectName)</RootNamespace>
+    <TargetFramework>net480</TargetFramework>
+    <Platforms>AnyCPU</Platforms>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- Manual overrides -->
+  <PropertyGroup>
+    <BepInExPath>$(GamePath)\BepInEx</BepInExPath>
+    <ManagedDataPath>$(GamePath)\Timberborn_Data\Managed</ManagedDataPath>
+    <UnityPath>$(ManagedDataPath)</UnityPath>
+  </PropertyGroup>
+
+  <!-- Set start action -->
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <StartAction>Program</StartAction>
+    <StartProgram>$(GamePath)\Timberborn.exe</StartProgram>
+    <StartArguments>-console</StartArguments>
+    <StartWorkingDirectory>$(GamePath)</StartWorkingDirectory>
+  </PropertyGroup>
+
+  <!-- Add BepInEx references -->
+  <ItemGroup Label="BepInEx">
+    <Reference Include="0Harmony20">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(BepInExPath)\core\0Harmony20.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BepInEx">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(BepInExPath)\core\BepInEx.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Add game references -->
+  <ItemGroup Label="Game">
+    <Reference Include="Timberborn.AlertPanelSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.AlertPanelSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ApplicationSettingsSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ApplicationSettingsSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.AreaSelectionSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.AreaSelectionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.AssetSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.AssetSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Attractions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Attractions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.AttractionsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.AttractionsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BehaviorSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BehaviorSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BehaviorSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BehaviorSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Benchmarking">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Benchmarking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BlockObjectAccesses">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BlockObjectAccesses.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BlockObjectTools">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BlockObjectTools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BlockSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BlockSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BlockSystemNavigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BlockSystemNavigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BlockSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BlockSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BonusSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BonusSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Bootstrapper">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Bootstrapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BottomBarSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BottomBarSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuilderHubSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuilderHubSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuildingRange">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuildingRange.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Buildings">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Buildings.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuildingsNavigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuildingsNavigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuildingsReachability">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuildingsReachability.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuildingStatuses">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuildingStatuses.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuildingsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuildingsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.BuildingTools">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.BuildingTools.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CameraAnchorPickerSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CameraAnchorPickerSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CameraSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CameraSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Carrying">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Carrying.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CarryingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CarryingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CharacterInitialization">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CharacterInitialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CharacterModelSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CharacterModelSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CharacterMovementSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CharacterMovementSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CharacterNavigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CharacterNavigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Characters">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Characters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CharacterSounds">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CharacterSounds.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CharactersUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CharactersUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Clusters">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Clusters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ClustersUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ClustersUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CommandLine">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CommandLine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Common">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ConstructibleSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ConstructibleSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ConstructionMode">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ConstructionMode.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ConstructionSites">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ConstructionSites.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ConstructionSitesUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ConstructionSitesUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Coordinates">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Coordinates.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CoreUIT">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CoreUIT.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CursorToolSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CursorToolSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Cutting">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Cutting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.CuttingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.CuttingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DeathSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DeathSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Debugging">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Debugging.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DebuggingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DebuggingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Demolishing">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Demolishing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DemolishingToolGroupSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DemolishingToolGroupSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DemolishingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DemolishingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Diagnostics">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Diagnostics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DiagnosticsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DiagnosticsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DistributionSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DistributionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DistributionSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DistributionSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DwellingSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DwellingSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.DwellingSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.DwellingSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.EditorStarter">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.EditorStarter.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Effects">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Effects.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Emptying">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Emptying.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.EmptyingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.EmptyingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.EnterableSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.EnterableSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.EntityPanelSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.EntityPanelSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.EntitySystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.EntitySystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ErrorReporting">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ErrorReporting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ErrorReportingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ErrorReportingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.FactionSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.FactionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.FactionSystemGame">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.FactionSystemGame.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.FactionSystemGameUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.FactionSystemGameUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.FeatureToggleSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.FeatureToggleSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Fields">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Fields.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.FieldsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.FieldsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Forestry">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Forestry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ForestryUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ForestryUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameDistricts">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameDistricts.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameDistrictsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameDistrictsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameExitSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameExitSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameSaveRepositorySystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameSaveRepositorySystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameSaveRepositorySystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameSaveRepositorySystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameSaveRuntimeSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameSaveRuntimeSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameSaveRuntimeSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameSaveRuntimeSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameSound">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameSound.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameStatistics">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameStatistics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GameUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GameUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Gathering">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Gathering.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GatheringUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GatheringUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GenericStoreSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GenericStoreSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GoalsSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GoalsSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GoodConsumingBuildingSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GoodConsumingBuildingSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GoodConsumingBuildingSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GoodConsumingBuildingSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Goods">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Goods.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GoodStackSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GoodStackSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GoodsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GoodsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Growing">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Growing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.GrowingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.GrowingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Hauling">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Hauling.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.HaulingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.HaulingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.InputSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.InputSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.InputSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.InventorySystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.InventorySystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.InventorySystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.InventorySystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.IrrigationSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.IrrigationSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.LaborSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.LaborSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.LaborSystemInitialization">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.LaborSystemInitialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.LaborSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.LaborSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Language">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Language.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.LevelVisibilitySystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.LevelVisibilitySystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.LevelVisibilitySystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.LevelVisibilitySystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Localization">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Localization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MainMenuScene">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MainMenuScene.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MainMenuSceneLoading">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MainMenuSceneLoading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapEditor">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapEditor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapEditorScene">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapEditorScene.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapEditorSceneLoading">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapEditorSceneLoading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapEditorSceneTickSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapEditorSceneTickSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapIndexSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapIndexSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MapSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MapSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MasterScene">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MasterScene.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MasterSceneLoading">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MasterSceneLoading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MechanicalSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MechanicalSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MechanicalSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MechanicalSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Metrics">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Metrics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MetricsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MetricsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Monuments">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Monuments.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.MortalSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.MortalSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResources">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResources.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesLifeCycle">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesLifeCycle.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesModelSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesModelSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesMoisture">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesMoisture.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesMoistureUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesMoistureUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesNavigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesNavigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesReproduction">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesReproduction.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NaturalResourcesUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NaturalResourcesUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Navigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Navigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NavigationUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NavigationUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NeedBehaviorSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NeedBehaviorSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NeedSpecifications">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NeedSpecifications.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NeedSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NeedSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NotificationSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NotificationSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.NotificationSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.NotificationSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Options">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Options.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PathSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PathSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Persistence">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Persistence.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PickObjectToolSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PickObjectToolSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Planting">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Planting.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PlantingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PlantingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Pollination">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Pollination.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Population">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Population.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PopulationUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PopulationUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PowerGenerating">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PowerGenerating.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PowerGeneratingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PowerGeneratingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PrefabOptimization">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PrefabOptimization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PreviewSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PreviewSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PrioritySystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PrioritySystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.PrioritySystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.PrioritySystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.QuickNotificationSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.QuickNotificationSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Rendering">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Rendering.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Reproduction">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Reproduction.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ReproductionUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ReproductionUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ReservableSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ReservableSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ResourceCountingSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ResourceCountingSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ResourceCountingSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ResourceCountingSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Ruins">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Ruins.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.RuinsModelShuffling">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.RuinsModelShuffling.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.RuinsNavigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.RuinsNavigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.RuinsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.RuinsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SceneLoading">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SceneLoading.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ScienceSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ScienceSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ScreenSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ScreenSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SelectionSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SelectionSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SelectionToolSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SelectionToolSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SettingsSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SettingsSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SettingsSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SettingsSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SimpleOutputBuildings">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SimpleOutputBuildings.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SingletonSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SingletonSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SkySystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SkySystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SleepSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SleepSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SlotSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SlotSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SoilMoistureSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SoilMoistureSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SoilMoistureSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SoilMoistureSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SoundSettingsSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SoundSettingsSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SoundSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SoundSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.StartingLocationSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.StartingLocationSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.StatusSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.StatusSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.SteamStoreSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.SteamStoreSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.StockKeeping">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.StockKeeping.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.StoreSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.StoreSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TemplateSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TemplateSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Terraforming">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Terraforming.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TerraformingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TerraformingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TerrainSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TerrainSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TickSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TickSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TimeSpeedButtonSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TimeSpeedButtonSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TimeSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TimeSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TimeSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TimeSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ToolPanelSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ToolPanelSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.ToolSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.ToolSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TopBarSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TopBarSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TutorialSettingsSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TutorialSettingsSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TutorialSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TutorialSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TutorialSystemInitialization">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TutorialSystemInitialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.TutorialSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.TutorialSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.UISound">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.UISound.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WalkingSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WalkingSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WalkingSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WalkingSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Wandering">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Wandering.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Warehouses">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Warehouses.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterBuildings">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterBuildings.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterBuildingsNavigation">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterBuildingsNavigation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterBuildingsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterBuildingsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterSourceSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterSourceSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterSourceSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterSourceSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterSystemRendering">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterSystemRendering.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WaterSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WaterSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WeatherSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WeatherSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WeatherSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WeatherSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Wellbeing">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Wellbeing.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WellbeingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WellbeingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WindSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WindSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Workshops">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Workshops.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WorkshopsUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WorkshopsUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WorkSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WorkSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.WorkSystemUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.WorkSystemUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.Yielding">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.Yielding.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Timberborn.YieldingUI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ManagedDataPath)\Timberborn.YieldingUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Add Unity references -->
+  <ItemGroup Label="Unity">
+    <Reference Include="UnityEngine">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.AccessibilityModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.AIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.ClothModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.InputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.JSONSerializeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.TerrainModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(UnityPath)\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Copy to plugins folder and zip -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <AllFiles Include="$(TargetDir)**\*.*" Exclude="$(TargetDir)**\*.pdb" />
+    </ItemGroup>
+    <Copy SourceFiles="@(AllFiles)" DestinationFolder="$(GamePath)\BepInEx\plugins\%(RecursiveDir)"></Copy>
+    <Delete Files="$(ProjectDir)\bin\$(TargetName).zip" />
+    <Copy SourceFiles="@(AllFiles)" DestinationFolder="$(TargetDir)..\Release\%(RecursiveDir)"></Copy>
+    <ZipDirectory SourceDirectory="$(TargetDir)..\Release" DestinationFile="$(ProjectDir)\bin\$(TargetName).zip" />
+    <RemoveDir Directories="$(TargetDir)..\Release" />
+  </Target>
+</Project>
