@@ -5,30 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Timberborn.AreaSelectionSystem;
-using Timberborn.BlockObjectTools;
-using Timberborn.BlockSystem;
-using Timberborn.Buildings;
 using Timberborn.BuildingTools;
-using Timberborn.EntitySystem;
+using Timberborn.Cutting;
+using Timberborn.Gathering;
 using Timberborn.GoodConsumingBuildingSystem;
 using Timberborn.Goods;
-using Timberborn.InputSystem;
 using Timberborn.InventorySystem;
-using Timberborn.PreviewSystem;
 using Timberborn.ScienceSystem;
-using Timberborn.SelectionSystem;
 using Timberborn.TimeSystem;
-using Timberborn.UISound;
 using Timberborn.Workshops;
 using Timberborn.Yielding;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 namespace ResourceAmounts
 {
-    [BepInPlugin("aedenthorn.ResourceAmounts", "Resource Amounts", "0.1.0")]
+    [BepInPlugin("aedenthorn.ResourceAmounts", "Resource Amounts", "0.1.1")]
     public partial class BepInExPlugin : BaseUnityPlugin
     {
         private static BepInExPlugin context;
@@ -39,7 +30,7 @@ namespace ResourceAmounts
         
         public static ConfigEntry<float> buildingCostMult;
         public static ConfigEntry<float> buildingConsumeMult;
-        public static ConfigEntry<float> cropYieldMult;
+        public static ConfigEntry<float> cuttableYieldMult;
         public static ConfigEntry<float> factoryFuelMult;
         public static ConfigEntry<float> factoryIngredientMult;
         public static ConfigEntry<float> factoryProductMult;
@@ -61,7 +52,7 @@ namespace ResourceAmounts
 
             buildingCostMult = Config.Bind<float>("Options", "BuildingCostMult", 1, "Multiply building resource consumption by this amount.");
             buildingConsumeMult = Config.Bind<float>("Options", "BuildingConsumeMult", 1, "Multiply building resource consumption by this amount.");
-            cropYieldMult = Config.Bind<float>("Options", "CropYieldMult", 1, "Multiply crop yield by this amount.");
+            cuttableYieldMult = Config.Bind<float>("Options", "CuttableYieldMult", 1, "Multiply cuttable yield by this amount.");
             factoryFuelMult = Config.Bind<float>("Options", "FactoryFuelMult", 1, "Multiply manufactory fuel consumption by this amount.");
             factoryIngredientMult = Config.Bind<float>("Options", "FactoryIngredientMult", 1, "Multiply manufactory ingredient consumption by this amount.");
             factoryProductMult = Config.Bind<float>("Options", "FactoryProductMult", 1, "Multiply manufactory product yield by this amount.");
@@ -125,15 +116,34 @@ namespace ResourceAmounts
                 ____supplyLeft += ____dayNightCycle.FixedDeltaTimeInHours * __instance.GoodPerHour * (1 - buildingConsumeMult.Value);
             }
         }
-        [HarmonyPatch(typeof(Yielder), nameof(Yielder.Yield))]
-        [HarmonyPatch(MethodType.Getter)]
-        static class Yielder_Yield_Get_Patch
+        [HarmonyPatch(typeof(Yielder), nameof(Yielder.Initialize))]
+        static class Yielder_Initialize_Patch
         {
-            static void Prefix(ref GoodAmount __result)
+            static void Postfix(Yielder __instance, ref GoodAmount ____yield, ref GoodAmount ____initialYield)
+            {
+                if (!modEnabled.Value || (!__instance.GetComponent<Cuttable>() && !__instance.GetComponent<Gatherable>()))
+                    return;
+                ____yield.Amount = Mathf.CeilToInt(____yield.Amount * cuttableYieldMult.Value);
+                ____initialYield.Amount = Mathf.CeilToInt(____initialYield.Amount * cuttableYieldMult.Value);
+            }
+        }
+        [HarmonyPatch(typeof(Yielder), "Awake")]
+        static class Yielder_Awake_Patch
+        {
+            static void Postfix(Yielder __instance, ref GoodAmount ____yield, ref GoodAmount ____initialYield)
+            {
+                if (!modEnabled.Value || (!__instance.GetComponent<Cuttable>() && !__instance.GetComponent<Gatherable>()))
+                    return;
+            }
+        }
+        [HarmonyPatch(typeof(Cuttable), "Awake")]
+        static class Cuttable_Awake_Patch
+        {
+            static void Postfix(Cuttable __instance)
             {
                 if (!modEnabled.Value)
                     return;
-                __result.Amount = Mathf.CeilToInt(__result.Amount * cropYieldMult.Value);
+                __instance.Yield.Amount = Mathf.CeilToInt(__instance.Yield.Amount * cuttableYieldMult.Value);
             }
         }
         [HarmonyPatch(typeof(Manufactory), "ConsumeFuel")]
