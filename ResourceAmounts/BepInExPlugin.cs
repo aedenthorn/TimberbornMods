@@ -19,7 +19,7 @@ using UnityEngine;
 
 namespace ResourceAmounts
 {
-    [BepInPlugin("aedenthorn.ResourceAmounts", "Resource Amounts", "0.1.1")]
+    [BepInPlugin("aedenthorn.ResourceAmounts", "Resource Amounts", "0.2.0")]
     public partial class BepInExPlugin : BaseUnityPlugin
     {
         private static BepInExPlugin context;
@@ -30,7 +30,7 @@ namespace ResourceAmounts
         
         public static ConfigEntry<float> buildingCostMult;
         public static ConfigEntry<float> buildingConsumeMult;
-        public static ConfigEntry<float> cuttableYieldMult;
+        public static ConfigEntry<float> harvestYieldMult;
         public static ConfigEntry<float> factoryFuelMult;
         public static ConfigEntry<float> factoryIngredientMult;
         public static ConfigEntry<float> factoryProductMult;
@@ -52,7 +52,7 @@ namespace ResourceAmounts
 
             buildingCostMult = Config.Bind<float>("Options", "BuildingCostMult", 1, "Multiply building resource consumption by this amount.");
             buildingConsumeMult = Config.Bind<float>("Options", "BuildingConsumeMult", 1, "Multiply building resource consumption by this amount.");
-            cuttableYieldMult = Config.Bind<float>("Options", "CuttableYieldMult", 1, "Multiply cuttable yield by this amount.");
+            harvestYieldMult = Config.Bind<float>("Options", "HarvestYieldMult", 1, "Multiply cuttable yield by this amount.");
             factoryFuelMult = Config.Bind<float>("Options", "FactoryFuelMult", 1, "Multiply manufactory fuel consumption by this amount.");
             factoryIngredientMult = Config.Bind<float>("Options", "FactoryIngredientMult", 1, "Multiply manufactory ingredient consumption by this amount.");
             factoryProductMult = Config.Bind<float>("Options", "FactoryProductMult", 1, "Multiply manufactory product yield by this amount.");
@@ -123,8 +123,8 @@ namespace ResourceAmounts
             {
                 if (!modEnabled.Value || (!__instance.GetComponent<Cuttable>() && !__instance.GetComponent<Gatherable>()))
                     return;
-                ____yield.Amount = Mathf.CeilToInt(____yield.Amount * cuttableYieldMult.Value);
-                ____initialYield.Amount = Mathf.CeilToInt(____initialYield.Amount * cuttableYieldMult.Value);
+                ____yield.Amount = Mathf.CeilToInt(____yield.Amount * harvestYieldMult.Value);
+                ____initialYield.Amount = Mathf.CeilToInt(____initialYield.Amount * harvestYieldMult.Value);
             }
         }
         [HarmonyPatch(typeof(Yielder), "Awake")]
@@ -143,7 +143,17 @@ namespace ResourceAmounts
             {
                 if (!modEnabled.Value)
                     return;
-                __instance.Yield.Amount = Mathf.CeilToInt(__instance.Yield.Amount * cuttableYieldMult.Value);
+                __instance.Yield.Amount = Mathf.CeilToInt(__instance.Yield.Amount * harvestYieldMult.Value);
+            }
+        }
+        [HarmonyPatch(typeof(Gatherable), "Awake")]
+        static class Gatherable_Awake_Patch
+        {
+            static void Postfix(Gatherable __instance)
+            {
+                if (!modEnabled.Value)
+                    return;
+                __instance.Yield.Amount = Mathf.CeilToInt(__instance.Yield.Amount * harvestYieldMult.Value);
             }
         }
         [HarmonyPatch(typeof(Manufactory), "ConsumeFuel")]
